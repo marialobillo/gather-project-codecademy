@@ -127,7 +127,11 @@ describe('User visits index', () => {
 
   describe('and can navigate', () => {
     it('to /create', () => {
-      
+      // Setup
+      browser.url('/');
+      browser.click('a[href="create.html"]');
+      // Verification
+      assert.include(browser.getText('#navigation'), 'Create');
     });
   });
 });
