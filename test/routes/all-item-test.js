@@ -17,5 +17,21 @@ const findImageElementBySource = (htmlAsString, src) => {
 };
 
 describe('Server path: /', () => {
-  
+
+  beforeEach(connectDatabaseAndDropData);
+
+  afterEach(diconnectDatabase);
+
+  describe('GET', () => {
+    it('renders an item with a title and an image', async () => {
+      const item = await seedItemToDatabase();
+      const response = await request(app)
+            .get(`/`);
+      assert.include(parseTextFromHTML(response.text, '.item-title'), item.title);
+      const imageElement = findImageElementBySource(response.text, item.imageUrl);
+      assert.equal(imageElement.src, item.imageUrl);
+    });
+
+    
+  });
 });
