@@ -32,6 +32,16 @@ describe('Server path: /', () => {
       assert.equal(imageElement.src, item.imageUrl);
     });
 
-    
+    it('renders all items from the database', async () => {
+      const firstItem = await seedItemToDatabase({title: 'Item1'});
+      const secondItem = await seedItemToDatabase({title: 'Item2'});
+
+      const response = await request(app)
+            .get(`/`);
+
+      assert.include(parseTextFromHTML(response.text, `#item-${firstItem._id} .item-title`), firstItem.title);
+      assert.include(parseTextFromHTML(response.text, `#item-${secondItem._id} .item-title`), secondItem.title);
+    });
+
   });
 });
