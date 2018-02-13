@@ -1,17 +1,60 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Create</title>
+    <title>gather</title>
+    <link rel="icon" type="image/ico" href="img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600" rel="stylesheet">
+    <link rel='stylesheet' href='stylesheets/reset.css' />
+    <link rel='stylesheet' href='stylesheets/style.css' />
   </head>
   <body>
-    <form class="form" action="index.html" method="post">
-      <input type="text" name="Title" value="" id="title-input">
-      <input type="text" name="Description" value="" id="description-input">
-      <input type="text" name="Url Image" value="" id="imageUrl-input">
-      <button type="button" name="button" id="submit-button">
-        <p>Submit</p>
-      </button>
-    </form>
+    <div id="title-container">
+      <a href="/">
+        <img src="img/logo.svg" alt="logo" />
+        <div id="title">gather</div>
+      </a>
+    </div>
+    <div class="create-container">
+      <div class="create-card">
+        <div class="create-column">
+          <img id="created-image" src="" />
+        </div>
+        <div class="divider">
+        </div>
+        <div class="create-column">
+          <!-- Add your title code here: -->
+          <h2 class="form-title">Create</h2>
+
+          <form class="input-form" action="create.html" method="post" >
+            <!-- Add your form elements here -->
+            <label class="form-label" for="title">Title</label>
+            <input id="title-input" name="title" maxlength="50"/>
+
+            <label class="form-label" for="description">Description</label>
+            <textarea id="description-input" name="description"></textarea>
+
+            <label class="form-label" for="imageUrl">Image Url</label>
+            <input id="imageUrl-input" name="imageUrl" oninput="handleChange"/>
+
+            <div class="form-navigation">
+              <a href="/">
+                <img class="back-arrow" src="/img/back.svg" alt="back">
+              </a>
+              <button class="button submit-button" id="submit-button" type="submit">
+                <p>Create new</p>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      var img = document.getElementById('created-image');
+      function handleChange(e) {
+        var path = e.target.value.match(/^(https*:\/\/)/i) ? '' : 'http://';
+        img.src = path + e.target.value;
+      }
+      document.getElementById('imageUrl-input').oninput = handleChange;
+    </script>
   </body>
 </html>
